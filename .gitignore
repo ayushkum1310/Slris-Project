@@ -1,4 +1,5 @@
 .venv
+.env
 ayushResume.pdf
 __pycache__
 *.faiss

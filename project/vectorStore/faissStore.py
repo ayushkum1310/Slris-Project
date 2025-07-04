@@ -9,13 +9,13 @@ from project.documentParsers.parsers import DocumentParser
 class FaissStore:
     def __init__(self,
                  dim: int = 384,
-                 indexPath: str = "vectorStore/index.faiss",
-                 metaPath: str  = "vectorStore/meta.json",
+                 indexPath: str = "vectorDB/index.faiss",
+                 metaPath: str  = "vectorDB/meta.json",
                  modelName: str = "intfloat/e5-small-v2"):
         self.dim = dim
         self.indexPath = indexPath
         self.metaPath = metaPath
-        self.model = SentenceTransformer(modelName)
+        self.model = SentenceTransformer(modelName,device="cpu")
         self.index = None
         self.meta: List[Dict[str, Any]] = []
         self._loadIfExists()
@@ -56,12 +56,12 @@ class FaissStore:
 
 
 # if __name__ == "__main__":
-#     # Example usage
-#     store = FaissStore()
-#     text=DocumentParser().parse(r"D:\Slris\ayushResume.pdf")
-#     # store.add(["This is a test chunk.", "Another chunk for testing."], "test_source")
-#     store.add(text, "ayushResume.pdf")
-#     print("Added documents to the vector store.")
-#     results = store.search("Ayush's resume", k=3)
-#     for res in results:
-#         print(res)
+    # Example usage
+    # store = FaissStore()
+    # text=DocumentParser().parse(r"D:\Slris\ayushResume.pdf")
+    # # store.add(["This is a test chunk.", "Another chunk for testing."], "test_source")
+    # store.add(text, "ayushResume.pdf")
+    # print("Added documents to the vector store.")
+    # results = store.search("Ayush's resume", k=1)
+    # for res in results:
+    #     print(res)
