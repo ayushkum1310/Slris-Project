@@ -17,7 +17,7 @@ class RetrievalAgent:
         elif msg["type"] == "QUERY" and msg["receiver"] == self.name:
             query = msg["payload"]["query"]
             trace_id = msg["trace_id"]
-            results = self.store.search(query, k=3)
+            results = self.store.search(query, k=1)
             response = {
                 "sender": self.name,
                 "receiver": "LLMResponseAgent",
