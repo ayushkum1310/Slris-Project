@@ -4,3 +4,5 @@ ayushResume.pdf
 __pycache__
 *.faiss
 *.json
+tmp_uploads
+app1.py
