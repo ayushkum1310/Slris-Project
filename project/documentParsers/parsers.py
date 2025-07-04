@@ -60,13 +60,18 @@ class DocumentParser:
         return textwrap.wrap(cleaned, CHUNK_SIZE)
 
 
-if __name__ == "__main__":
-    parser = DocumentParser()
-    # Example usage:
-    pdf_chunks = parser.parse(r"D:\Slris\ayushResume.pdf")
+
+#Code for testing the DocumentParser class
+# Uncomment the following lines to test the parser directly
 
 
-    print(f"PDF chunks: {len(pdf_chunks)}")
-    for i in pdf_chunks:
-        print(i)
-        print("-" * 40)
+# if __name__ == "__main__":
+#     parser = DocumentParser()
+#     # Example usage:
+#     pdf_chunks = parser.parse(r"D:\Slris\ayushResume.pdf")
+
+
+#     print(f"PDF chunks: {len(pdf_chunks)}")
+#     for i in pdf_chunks:
+#         print(i)
+#         print("-" * 40)

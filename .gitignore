@@ -1,2 +1,5 @@
 .venv
 ayushResume.pdf
+__pycache__
+*.faiss
+*.json
