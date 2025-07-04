@@ -5,7 +5,7 @@ import pandas as pd
 import docx, pptx
 from PyPDF2 import PdfReader
 
-CHUNK_SIZE = 700  # ~500 tokens ≈ 750‑800 characters
+CHUNK_SIZE = 300  # ~500 tokens ≈ 750‑800 characters
 
 class DocumentParser:
     """Unified parser for PDF, DOCX, PPTX, CSV, TXT / MD."""

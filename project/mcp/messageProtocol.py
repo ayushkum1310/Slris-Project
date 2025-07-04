@@ -1,26 +1,20 @@
-# mcp/message_protocol.py
-from dataclasses import dataclass, asdict
-from enum import Enum
-from typing import Any, Dict, Optional
-import uuid
-import time
+from typing import TypedDict, Literal, Any, Dict
 
-class MessageType(str, Enum):
-    CONTEXT_REQUEST  = "CONTEXT_REQUEST"
-    CONTEXT_RESPONSE = "CONTEXT_RESPONSE"
-    RETRIEVAL_RESULT = "RETRIEVAL_RESULT"
-    LLM_QUERY        = "LLM_QUERY"
-    LLM_ANSWER       = "LLM_ANSWER"
-    ERROR            = "ERROR"
+class MCPPayload(TypedDict, total=False):
+    top_chunks: list[str]
+    query: str
+    retrieved_context: list[str]
+    answer: str
+    source_chunks: list[str]
 
-@dataclass
-class MCPMessage:
+class MCPMessage(TypedDict):
     sender: str
     receiver: str
-    type: MessageType
-    payload: Dict[str, Any]
-    traceId: str = uuid.uuid4().hex
-    timestamp: float = time.time()
-
-    def toDict(self) -> Dict[str, Any]:
-        return asdict(self)
+    type: Literal[
+        "INGESTION_RESULT",
+        "RETRIEVAL_RESULT",
+        "LLM_RESPONSE",
+        "QUERY"
+    ]
+    trace_id: str
+    payload: MCPPayload

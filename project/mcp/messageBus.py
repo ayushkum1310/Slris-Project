@@ -1,25 +1,20 @@
-# mcp/message_bus.py
-from collections import defaultdict
-from queue import Queue, Empty
-from threading import Thread
-from typing import Callable, Dict
-
-from .messageProtocol import MCPMessage
+from typing import Callable, Dict, List
+from threading import Lock
 
 class MessageBus:
-    """Publish / subscribe, in‑memory."""
     def __init__(self):
-        self.queues: Dict[str, Queue] = defaultdict(Queue)
+        self.subscribers: Dict[str, List[Callable]] = {}
+        self.lock = Lock()
 
-    def publish(self, message: MCPMessage) -> None:
-        self.queues[message.receiver].put(message)
+    def subscribe(self, agent_name: str, callback: Callable):
+        with self.lock:
+            if agent_name not in self.subscribers:
+                self.subscribers[agent_name] = []
+            self.subscribers[agent_name].append(callback)
 
-    def subscribe(self, agentName: str, handler: Callable[[MCPMessage], None]) -> None:
-        def _listen():
-            while True:
-                try:
-                    msg = self.queues[agentName].get(timeout=0.1)
-                    handler(msg)
-                except Empty:
-                    continue
-        Thread(target=_listen, daemon=True).start()
+    def send(self, message: dict):
+        receiver = message.get("receiver")
+        with self.lock:
+            callbacks = self.subscribers.get(receiver, [])
+        for cb in callbacks:
+            cb(message)
