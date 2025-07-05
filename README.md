@@ -109,9 +109,7 @@ project/
 ├── vectorStore/
 │   ├── __init__.py
 │   └── faissStore.py            # FAISS vector store
-├── ui/
-│   ├── __init__.py
-│   └── app.py                   # Main Streamlit application
+│── app.py                   # Main Streamlit application
 ├── vectorDB/                    # Generated vector indices
 ├── requirements.txt
 ├── .env                         # Environment variables
