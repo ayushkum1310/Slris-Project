@@ -25,7 +25,10 @@ from project.agents.coordinatorAgent import CoordinatorAgent
 from project.agents.ingestionAgent import IngestionAgent
 from project.agents.retrievalAgent import RetrievalAgent
 from project.agents.llmResponseAgent import LLMResponseAgent
+from dotenv import load_dotenv
+load_dotenv()
 
+google_api_key = os.getenv("GOOGLE_API_KEY")
 # ------------------------------------------------------------
 # 1. Initialize singletons once per Streamlit session
 # ------------------------------------------------------------
@@ -48,7 +51,7 @@ if "bus" not in st.session_state:
     st.session_state.coordinator = CoordinatorAgent(bus)
     st.session_state.ingestion   = IngestionAgent(bus)
     st.session_state.retrieval   = RetrievalAgent(bus)
-    st.session_state.llm_agent   = LLMResponseAgent(bus, google_api_key="AIzaSyBQsNfYtpahlcH8w6He6ScCNCOJZtdiKG0")
+    st.session_state.llm_agent   = LLMResponseAgent(bus, google_api_key=google_api_key)
 
     st.session_state.chat_history = []
 

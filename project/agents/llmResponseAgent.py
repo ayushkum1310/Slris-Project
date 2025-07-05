@@ -5,7 +5,7 @@ class LLMResponseAgent:
     def __init__(self, bus: MessageBus, google_api_key: str):
         self.bus = bus
         self.name = "LLMResponseAgent"
-        self.client = genai.Client(api_key="AIzaSyBQsNfYtpahlcH8w6He6ScCNCOJZtdiKG0")
+        self.client = genai.Client(api_key=google_api_key)
         self.bus.subscribe(self.name, self.handle_message)
 
     def handle_message(self, msg):

@@ -30,15 +30,15 @@ The system consists of 4 main agents communicating via MCP:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/ayushkum1310/Slris-Project
 cd agentic-rag-chatbot
 ```
 
 ### 2. Create Virtual Environment
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
